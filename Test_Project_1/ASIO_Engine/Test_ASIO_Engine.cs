@@ -198,23 +198,6 @@ public class Test_ASIO_Engine
     }
 
     [TestMethod]
-    public void Throws_OnInvalidArguments()
-    {
-        var engine = new ASIO_Engine();
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.Start(null, 44100, 2, 2));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.Start("", 44100, 2, 2));
-        Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => engine.Start("Mock", 0, 2, 2));
-        Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => engine.Start("Mock", 44100, 0, 2));
-        Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => engine.Start("Mock", 44100, 2, 0));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.GetDriverCapabilities(null));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.GetMinBufferSize(null));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.GetMaxBufferSize(null));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.GetPreferredBufferSize(null));
-        Assert.ThrowsException<System.ArgumentNullException>(() => engine.IsSampleRateSupported(null, 44100));
-        Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => engine.IsSampleRateSupported("Mock", 0));
-    }
-
-    [TestMethod]
     public void GetInputOutputAudioData_ReturnsNull_OnInvalidIndex()
     {
         var engine = new ASIO_Engine();

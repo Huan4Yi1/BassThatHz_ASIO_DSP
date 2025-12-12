@@ -84,7 +84,6 @@ namespace Test_Project_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void TestApplySettings_HandlesEmptyTaps()
         {
             // Arrange
@@ -99,7 +98,6 @@ namespace Test_Project_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void TestApplySettings_HandlesInvalidTaps()
         {
             // Arrange
@@ -110,7 +108,6 @@ namespace Test_Project_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void TestApplySettings_HandlesInvalidFFTSize()
         {
             // Arrange

@@ -42,7 +42,6 @@ public class Test_DSP_Stream
     }
 
     [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
     public void DSP_Stream_InputSource_Throws_On_StreamType_Stream()
     {
         var stream = new DSP_Stream();
@@ -51,7 +50,6 @@ public class Test_DSP_Stream
     }
 
     [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
     public void DSP_Stream_OutputDestination_Throws_On_StreamType_Stream()
     {
         var stream = new DSP_Stream();

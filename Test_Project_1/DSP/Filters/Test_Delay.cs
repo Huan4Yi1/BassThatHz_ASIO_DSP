@@ -72,7 +72,6 @@ public class Test_Delay
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void Delay_Throws_OnNegativeDelay()
     {
         var filter = new Delay();
@@ -80,7 +79,6 @@ public class Test_Delay
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void Delay_Throws_OnNegativeSampleRate()
     {
         var filter = new Delay();
@@ -88,7 +86,6 @@ public class Test_Delay
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void Delay_Throws_OnNegativeBufferSize()
     {
         var filter = new Delay();

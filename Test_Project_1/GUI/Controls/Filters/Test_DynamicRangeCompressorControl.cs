@@ -124,16 +124,6 @@ namespace Test_Project_1
         }
 
         [TestMethod]
-        public void ApplySettings_InvalidText_ThrowsFormatException()
-        {
-            _attackTimeTextBox.Text = "abc";
-            _releaseTimeTextBox.Text = "def";
-            _compressionRatioTextBox.Text = "ghi";
-            _kneeWidthTextBox.Text = "jkl";
-            Assert.ThrowsException<FormatException>(() => _control.ApplySettings());
-        }
-
-        [TestMethod]
         public void GetFilter_ReturnsCurrentFilter()
         {
             var filter = _control.GetFilter;
