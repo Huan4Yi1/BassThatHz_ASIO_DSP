@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 /// <summary>
 ///  BassThatHz ASIO DSP Processor Engine
-///  Copyright (c) 2025 BassThatHz
+///  Copyright (c) 2026 BassThatHz
 /// 
 /// Permission is hereby granted to use this software 
 /// and associated documentation files (the "Software"), 
@@ -32,8 +32,8 @@ using System.Windows.Forms;
 public partial class ctl_MonitorPage : UserControl
 {
     #region Variables
-    public Thread? _Form_Monitoring_Thread;
-
+    public Thread? Form_Monitoring_Thread;
+    public Thread? Form_Align_Thread;
     #endregion
 
     #region Constructor
@@ -51,28 +51,41 @@ public partial class ctl_MonitorPage : UserControl
     #endregion
 
     #region Event Handlers
+    protected void ctl_MonitorPage_Load(object? sender, EventArgs e)
+    {
+    }
 
     protected void btn_Monitor_Click(object? sender, EventArgs e)
     {
-        if (_Form_Monitoring_Thread == null || !_Form_Monitoring_Thread.IsAlive)
+        if (this.Form_Monitoring_Thread == null || !this.Form_Monitoring_Thread.IsAlive)
         {
             Program.Form_Monitoring = new();
 
             foreach (var item in Program.DSP_Info.Streams)
                 Program.Form_Monitoring.CreateStreamVolumeLevelControl(item);
 
-            _Form_Monitoring_Thread = new(() =>
+            this.Form_Monitoring_Thread = new(() =>
                                             Application.Run(Program.Form_Monitoring)
                                           );
 
-            _ = _Form_Monitoring_Thread.TrySetApartmentState(ApartmentState.STA);
-            _Form_Monitoring_Thread.Start();
+            _ = this.Form_Monitoring_Thread.TrySetApartmentState(ApartmentState.STA);
+            this.Form_Monitoring_Thread.Start();
         }
     }
 
-    protected void ctl_MonitorPage_Load(object? sender, EventArgs e)
+    protected void btn_Align_Click(object sender, EventArgs e)
     {
-    }
-    #endregion
+        if (this.Form_Align_Thread == null || !this.Form_Align_Thread.IsAlive)
+        {
+            Program.Form_Align = new();
+            this.Form_Align_Thread = new(() =>
+                                            Application.Run(Program.Form_Align)
+                                          );
 
+            _ = this.Form_Align_Thread.TrySetApartmentState(ApartmentState.STA);
+            this.Form_Align_Thread.Start();
+        }
+    }   
+
+    #endregion    
 }

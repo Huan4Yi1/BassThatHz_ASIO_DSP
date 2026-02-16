@@ -215,7 +215,7 @@ namespace NAudio.Dsp
             this.Frequency = cutoffFrequency;
             this.Q = q;
 
-            this.BiQuadFilterType = BiQuadFilterTypes.LPF;
+            this.BiQuadFilterType = BiQuadFilterTypes.LPF1st;
 
             this.Init();
             double w0 = PI2 * cutoffFrequency / sampleRate;

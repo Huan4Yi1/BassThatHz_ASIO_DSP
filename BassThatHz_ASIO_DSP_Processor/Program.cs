@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 /// <summary>
 ///  BassThatHz ASIO DSP Processor Engine
-///  Copyright (c) 2025 BassThatHz
+///  Copyright (c) 2026 BassThatHz
 /// 
 /// Permission is hereby granted to use this software 
 /// and associated documentation files (the "Software"), 
@@ -36,6 +36,7 @@ public static class Program
     public readonly static ASIO_Engine ASIO = new();
     public static FormMain? Form_Main;
     public static FormMonitoring? Form_Monitoring;
+    public static FormAlign? Form_Align;
     public static DateTime App_StartTime = DateTime.Now;
 
     [STAThread]
@@ -65,6 +66,12 @@ public static class Program
             _ = Form_Monitoring.Invoke((MethodInvoker)delegate
             {
                 Form_Monitoring.Close();
+            });
+
+        if (Form_Align != null && Form_Align.IsHandleCreated)
+            _ = Form_Align.Invoke((MethodInvoker)delegate
+            {
+                Form_Align.Close();
             });
 
         //Dispose of the Unmanaged\Unsafe NAudio ASIO ole32 Com Object wrapper

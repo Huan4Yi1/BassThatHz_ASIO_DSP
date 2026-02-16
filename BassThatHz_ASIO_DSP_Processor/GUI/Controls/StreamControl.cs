@@ -14,7 +14,7 @@ using REW_API;
 
 /// <summary>
 ///  BassThatHz ASIO DSP Processor Engine
-///  Copyright (c) 2025 BassThatHz
+///  Copyright (c) 2026 BassThatHz
 /// 
 /// Permission is hereby granted to use this software 
 /// and associated documentation files (the "Software"), 

@@ -29,34 +29,47 @@ namespace BassThatHz_ASIO_DSP_Processor.GUI.Tabs
         /// </summary>
         protected void InitializeComponent()
         {
-            this.btn_Monitor = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            btn_Monitor = new System.Windows.Forms.Button();
+            btn_Align = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
             // btn_Monitor
             // 
-            this.btn_Monitor.Location = new System.Drawing.Point(3, 3);
-            this.btn_Monitor.Name = "btn_Monitor";
-            this.btn_Monitor.Size = new System.Drawing.Size(190, 23);
-            this.btn_Monitor.TabIndex = 0;
-            this.btn_Monitor.Text = "Open Monitoring Window";
-            this.btn_Monitor.UseVisualStyleBackColor = true;
-            this.btn_Monitor.Click += new System.EventHandler(this.btn_Monitor_Click);
+            btn_Monitor.Location = new System.Drawing.Point(3, 3);
+            btn_Monitor.Name = "btn_Monitor";
+            btn_Monitor.Size = new System.Drawing.Size(166, 22);
+            btn_Monitor.TabIndex = 0;
+            btn_Monitor.Text = "Open Monitoring Window";
+            btn_Monitor.UseVisualStyleBackColor = true;
+            btn_Monitor.Click += btn_Monitor_Click;
+            // 
+            // btn_Align
+            // 
+            btn_Align.Location = new System.Drawing.Point(3, 31);
+            btn_Align.Name = "btn_Align";
+            btn_Align.Size = new System.Drawing.Size(211, 22);
+            btn_Align.TabIndex = 1;
+            btn_Align.Text = "Open Crossover Alignment Window";
+            btn_Align.UseVisualStyleBackColor = true;
+            btn_Align.Click += btn_Align_Click;
             // 
             // ctl_MonitorPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.Controls.Add(this.btn_Monitor);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ctl_MonitorPage";
-            this.Size = new System.Drawing.Size(623, 305);
-            this.Load += new System.EventHandler(this.ctl_MonitorPage_Load);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScroll = true;
+            Controls.Add(btn_Align);
+            Controls.Add(btn_Monitor);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Name = "ctl_MonitorPage";
+            Size = new System.Drawing.Size(545, 286);
+            Load += ctl_MonitorPage_Load;
+            ResumeLayout(false);
 
         }
 
         #endregion
         protected System.Windows.Forms.Button btn_Monitor;
+        protected System.Windows.Forms.Button btn_Align;
     }
 }
