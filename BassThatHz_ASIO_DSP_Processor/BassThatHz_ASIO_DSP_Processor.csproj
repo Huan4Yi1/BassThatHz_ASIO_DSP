@@ -48,6 +48,17 @@
     <DefineConstants>
     </DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<PublishAot>true</PublishAot>
+    <PublishTrimmed>true</PublishTrimmed>
+	<StripSymbols>true</StripSymbols>
+    <IlcTrimMetadata>true</IlcTrimMetadata>
+    <DebuggerSupport>false</DebuggerSupport>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <EventSourceSupport>false</EventSourceSupport>
+    <ReflectionMetadata>false</ReflectionMetadata>
+    <StripILAfterAot>true</StripILAfterAot>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <_SuppressWinFormsTrimError>true</_SuppressWinFormsTrimError>
     <NoWarn>1701;1702;CA1416</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
