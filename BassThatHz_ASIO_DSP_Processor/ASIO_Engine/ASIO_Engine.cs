@@ -463,28 +463,41 @@ public class ASIO_Engine : IDisposable
         // Create or Re-create ASIO device as necessary
         if (this.ASIO == null)
         {
-            this.ASIO = this.Get_New_ASIO_Instance(asio_Device_Name);
+            var asio = this.Get_New_ASIO_Instance(asio_Device_Name);
+            if (asio == null)
+                throw new InvalidOperationException($"Failed to create ASIO driver instance for '{asio_Device_Name}'.");
 
-            //Wire up the ASIO events
-            this.WireUpASIO_Events();
+            try
+            {
+                this.DSP_PeakProcessingTime = TimeSpan.Zero;
+                this.Underruns_Counter = 0;
+                var InputOffset = 0; var OutputOffset = 0; //Unused
+                asio.Init(this.NumberOf_Input_Channels, this.NumberOf_Output_Channels, this.SampleRate_Current, OutputOffset, InputOffset);
 
-            this.DSP_PeakProcessingTime = TimeSpan.Zero;
-            this.Underruns_Counter = 0;
-            var InputOffset = 0; var OutputOffset = 0; //Unused
-            this.ASIO.Init(this.NumberOf_Input_Channels, this.NumberOf_Output_Channels, this.SampleRate_Current, OutputOffset, InputOffset);
+                //Create the Input and Output buffers (default HW size * number of channels)
+                this.SamplesPerChannel = asio.SamplesPerBuffer;
+                this.BufferSize_Latency_ms = (double)SamplesPerChannel / (double)SampleRate_Current * 1000;
 
-            //Create the Input and Output buffers (default HW size * number of channels)
-            this.SamplesPerChannel = this.ASIO.SamplesPerBuffer;
-            this.BufferSize_Latency_ms = (double)SamplesPerChannel / (double)SampleRate_Current * 1000;
+                //For performance reasons, only create the arrays once!
+                this.InputBuffer = new double[this.NumberOf_Input_Channels][];
+                for (var i = 0; i < this.NumberOf_Input_Channels; i++)
+                    this.InputBuffer[i] = new double[this.SamplesPerChannel];
 
-            //For performance reasons, only create the arrays once!
-            this.InputBuffer = new double[this.NumberOf_Input_Channels][];
-            for (var i = 0; i < this.NumberOf_Input_Channels; i++)
-                this.InputBuffer[i] = new double[this.SamplesPerChannel];
+                this.OutputBuffer = new double[this.NumberOf_Output_Channels][];
+                for (var i = 0; i < this.NumberOf_Output_Channels; i++)
+                    this.OutputBuffer[i] = new double[this.SamplesPerChannel];
 
-            this.OutputBuffer = new double[this.NumberOf_Output_Channels][];
-            for (var i = 0; i < this.NumberOf_Output_Channels; i++)
-                this.OutputBuffer[i] = new double[this.SamplesPerChannel];
+                this.ASIO = asio;
+
+                // Wire up ASIO events after initialization to avoid startup callbacks
+                // stopping/disposal while initialization is still in progress.
+                this.WireUpASIO_Events();
+            }
+            catch
+            {
+                asio.Dispose();
+                throw;
+            }
         }
         this.ASIO?.Start();
     }
